@@ -1,0 +1,43 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/auth.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+    <main>
+        <% if(error.length>0) {%>
+            <div class="user-message user-message--error">
+                <h3><%=error%></h3>
+            </div>
+            <%}%>
+        <form class="login-form" action="/signup" method="POST">
+            <div class="form-control">
+                <label for="email">E-Mail</label>
+                <input type="email" name="email" id="email" required>
+            </div>
+            <div class="form-control">
+                <label for="email">Name</label>
+                <input type="name" name="name" id="name" required>
+            </div>
+            <div class="form-control">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" required>
+            </div>
+            <div class="form-control">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" name="confirmPassword" id="confirmPassword">
+            </div>
+            <div class="form-control">
+                <label for="phoneno">Phone No</label>
+                <input type="text" name="mobileno" id="mobileno">
+            </div>
+            <div class="form-control">
+                <label for="description">Address</label>
+                <textarea name="address" id="address" rows="5" required></textarea>
+            </div>
+            <button class="btn" type="submit">Sign Up !</button>
+        </form>
+    </main>
+<%- include('../includes/end.ejs') %>
