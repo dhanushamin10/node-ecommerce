@@ -5,21 +5,21 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const flash = require("connect-flash");
-const multer = require("multer");
+/* const multer = require("multer"); */
 const helmet = require("helmet");
 const compression = require("compression");
 const morgan = require("morgan");
 require("dotenv").config();
 
-const XStorageEngine = multer.diskStorage({
+/* const XStorageEngine = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "images");
   },
   filename: (req, file, cb) => {
     cb(null, new Date().getTime().toString() + "-" + file.originalname);
   },
-});
-const filefilter = (req, file, cb) => {
+}); */
+/* const filefilter = (req, file, cb) => {
   if (
     file.mimetype === "image/png" ||
     file.mimetype === "image/jpeg" ||
@@ -29,7 +29,7 @@ const filefilter = (req, file, cb) => {
   } else {
     cb(null, false);
   }
-};
+}; */
 const mongoDBstore = require("connect-mongodb-session")(session);
 const store = new mongoDBstore({
   uri: process.env.DB_URL,
@@ -55,9 +55,9 @@ app.use(helmet());
 app.use(compression());
 app.use(morgan("combined", { stream: accessLogStreams }));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(
+/* app.use(
   multer({ storage: XStorageEngine, fileFilter: filefilter }).single("image")
-);
+); */
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/images", express.static(path.join(__dirname, "images")));
 app.use(

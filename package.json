@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Complete Node.js Guide",
   "main": "app.js",
-  "engines": {
-    "node":"12.14.0"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js",
@@ -24,7 +21,7 @@
     "connect-mongodb-session": "^2.3.3",
     "csurf": "^1.11.0",
     "dotenv": "^8.2.0",
-    "ejs": "^2.6.1",
+    "ejs": "^2.7.4",
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.17.1",
