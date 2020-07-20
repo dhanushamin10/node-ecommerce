@@ -19,7 +19,7 @@
       </li>
       <li class="main-header__item">
         <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders"
-          >Orders</a
+          >My Orders</a
         >
       </li>
       <% if(isAdmin) {%>
@@ -85,10 +85,11 @@
       <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
     </li>
     <li class="mobile-nav__item">
-      <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders"
-        >Orders</a
+      <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders">My Orders</a>
+        </a
       >
     </li>
+    <% if(isAdmin) {%>
     <li class="mobile-nav__item">
       <a
         class="<%= path === '/admin/add-product' ? 'active' : '' %>"
@@ -103,7 +104,14 @@
         >Admin Products
       </a>
     </li>
-    <% } %> <% if (!isAuthenticated) { %>
+    <li class="mobile-nav__item">
+      <a
+        class="<%= path === '/admin/products' ? 'active' : '' %>"
+        href="/admin/all-orders"
+        >All Orders
+      </a>
+    </li>
+    <%} %> <% } %> <% if (!isAuthenticated) { %>
     <li class="mobile-nav__item">
       <a class="<%= path === '/login' ? 'active' : '' %>" href="/login"
         >Login</a
