@@ -100,8 +100,6 @@ exports.postEditProduct = (req, res, next) => {
 exports.getProducts = (req, res, next) => {
   console.log(req.user._id);
   Product.find({ userId: req.user._id })
-    // .select('title price -_id')
-    // .populate('userId', 'name')
     .then((products) => {
       console.log(products);
       res.render("admin/products", {

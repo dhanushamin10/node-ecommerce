@@ -1,11 +1,15 @@
 const path = require("path");
-
+const fs = require("fs");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const flash = require("connect-flash");
 const multer = require("multer");
+const helmet = require("helmet");
+const compression = require("compression");
+const morgan = require("morgan");
+require("dotenv").config();
 
 const XStorageEngine = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -28,13 +32,16 @@ const filefilter = (req, file, cb) => {
 };
 const mongoDBstore = require("connect-mongodb-session")(session);
 const store = new mongoDBstore({
-  uri: `mongodb+srv://admin_dhanush:iamadrifter7@amincluster-96sv7.mongodb.net/shop`,
+  uri: process.env.DB_URL,
   collection: "sessions",
 });
 
 const errorController = require("./controllers/error");
 const User = require("./models/user");
-
+const accessLogStreams = fs.createWriteStream(
+  path.join(__dirname, "access.log"),
+  { flags: "a" }
+);
 const app = express();
 
 app.set("view engine", "ejs");
@@ -44,7 +51,9 @@ const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
 const authRoutes = require("./routes/auth");
 const { collection, db } = require("./models/user");
-
+app.use(helmet());
+app.use(compression());
+app.use(morgan("combined", { stream: accessLogStreams }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
   multer({ storage: XStorageEngine, fileFilter: filefilter }).single("image")
@@ -82,11 +91,12 @@ app.use(authRoutes);
 app.use(errorController.get404);
 
 mongoose
-  .connect(
-    "mongodb+srv://admin_dhanush:iamadrifter7@amincluster-96sv7.mongodb.net/shop?retryWrites=true&w=majority"
-  )
+  .connect(process.env.DB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then((result) => {
-    app.listen(3000);
+    app.listen(process.env.PORT || 3000);
   })
   .catch((err) => {
     console.log(err);

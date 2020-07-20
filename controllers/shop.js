@@ -6,6 +6,7 @@ const pdfDoc = require("pdfkit");
 const { count } = require("console");
 const { page } = require("pdfkit");
 const LIMIT = 4;
+require("dotenv").config();
 
 exports.getProducts = (req, res, next) => {
   const page = +req.query.page || 1;
@@ -191,27 +192,10 @@ exports.getInvoice = (req, res, next) => {
       });
       doc.text("Total Price :" + sum + "Rs");
       doc.end();
-      /*  fs.readFile(filePath, (err, data) => {
-        if (err) {
-          res.redirect("/");
-        } else {
-         
-          res.send(data);
-        }
-      }); */
-      /*  const file = fs.createReadStream(filePath);
-      res.setHeader("Content-Type", "application/pdf");
-      res.setHeader(
-        "Content-Disposition",
-        `attachment;filename=${InvoiceName}`
-      );
-      file.pipe(res); */
     }
   });
 };
-const stripe = require("stripe")(
-  "sk_test_51H4440Ek2FTkQLolMLl67vy5pAjkbxPyY9ekEqm4xilgGtOOYTQOOdEx8b9pOgHgw04qmFyxuPjBHOSxIqUnTREX00zXHV17qs"
-);
+const stripe = require("stripe")(process.env.STRIPE_KEY);
 exports.getCheckout = (req, res, next) => {
   let products;
   let sum;

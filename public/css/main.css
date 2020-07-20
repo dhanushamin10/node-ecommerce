@@ -4,6 +4,11 @@
 * {
   box-sizing: border-box;
 }
+@import url("https://fonts.googleapis.com/css2?family=Ranchers&display=swap");
+.logo-custom {
+  font-family: "Ranchers";
+  font-size: 22px;
+}
 
 body {
   padding: 0;
@@ -64,7 +69,7 @@ form {
 
 .main-header__item {
   margin: 0 1rem;
-  padding: 0;
+  padding: 1rem;
 }
 
 .main-header__item a,
@@ -263,6 +268,7 @@ form {
 .pagination {
   margin-top: 2rem;
   text-align: center;
+ 
 }
 .pagination a {
   text-decoration: none;
@@ -270,6 +276,7 @@ form {
   padding: 1rem;
   border: 1px solid rgb(4, 59, 41);
   margin: 0 1rem;
+  border-radius: 50%;
 }
 .pagination a:hover,
 .pagination a:active,
