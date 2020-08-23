@@ -1,6 +1,6 @@
 # Online Travel Store
 
-## Live Site: https://travel-store.herokuapp.com/
+## Live Site: <a target="_blank" href="https://travel-store.herokuapp.com/"> Click here </a>
 
 E-Commerce Web application built using Express and MongoDB
 Fully functioning Ecommerce web app for travel enthusiasts to buy equipments
